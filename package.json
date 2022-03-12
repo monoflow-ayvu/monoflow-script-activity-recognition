@@ -1,30 +1,8 @@
 {
-  "name": "monoflow-script-env",
-  "version": "1.17.0",
-  "description": "Script padrão de todos os scripts. Template para criar um script.",
-  "settingsSchema": {
-    "display": "form",
-    "components": [
-      {
-        "label": "Nome",
-        "description": "Nome para saludar",
-        "tableView": true,
-        "key": "nome",
-        "type": "textfield",
-        "input": true,
-        "defaultValue": "User"
-      },
-      {
-        "type": "button",
-        "label": "Submit",
-        "key": "submit",
-        "disableOnInvalid": true,
-        "block": true,
-        "input": true,
-        "tableView": false
-      }
-    ]
-  },
+  "name": "activity-recognition",
+  "version": "0.0.0",
+  "description": "Script para criar eventos ao reconhecer uma atividade.",
+  "settingsSchema": {},
   "license": "EULA",
   "private": true,
   "scripts": {
@@ -74,8 +52,8 @@
     "webpack-cli": "4.9.2"
   },
   "dependencies": {
-    "@fermuch/monoutils": "^0.0.30",
-    "@fermuch/telematree": "^9.16.0",
+    "@fermuch/monoutils": "^0.0.31",
+    "@fermuch/telematree": "^9.20.0",
     "cross-fetch": "3.1.5",
     "firebase": "9.6.8",
     "lodash": "4.17.21",
