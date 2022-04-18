@@ -86,7 +86,7 @@ function changeHandler(event: ActivityRecognitionEvent): void {
     return;
   }
 
-  platform.log('activity recognition event', data);
+  platform.log('saving significant activity recognition event', data);
   env.project?.saveEvent(event);
   setCurrentActivity(data.activityType, data.confidence);
 }

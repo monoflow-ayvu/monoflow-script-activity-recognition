@@ -102,7 +102,75 @@ describe("onInit", () => {
     expect(call2[0].deviceId).toBe("TEST");
     expect(call2[0].kind).toBe("activity-recognition");
     expect(call2[0].loginId).toBe("");
-  })
+  });
+
+  it('only stores significant changes (>30% change)', () => {
+    (env.project as any) = {
+      saveEvent: jest.fn(),
+      collectionsManager: {
+        ensureExists: () => ({
+          watch: jest.fn(),
+          bump: jest.fn(),
+          get: () => ({
+            bump: jest.fn(),
+          }),
+        }),
+      }
+    };
+
+    const ev = new MockActivityRecognitionEvent('STILL', 0.3);
+    const ev2 = new MockActivityRecognitionEvent('STILL', 0.9);
+
+    loadScript();
+    messages.emit('onInit');
+    messages.emit('onEvent', ev);
+    messages.emit('onEvent', ev);
+    messages.emit('onEvent', ev2);
+
+    expect(env.project.saveEvent).toHaveBeenCalledTimes(2);
+    const call = (env.project.saveEvent as jest.Mock).mock.calls[0];
+    expect(call[0].createdAt).toBeTruthy();
+    expect(call[0].deviceId).toBe("TEST");
+    expect(call[0].kind).toBe("activity-recognition");
+    expect(call[0].loginId).toBe("");
+
+    const call2 = (env.project.saveEvent as jest.Mock).mock.calls[1];
+    expect(call2[0].createdAt).toBeTruthy();
+    expect(call2[0].deviceId).toBe("TEST");
+    expect(call2[0].kind).toBe("activity-recognition");
+    expect(call2[0].loginId).toBe("");
+  });
+
+  it('does NOT store on unsignificant changes (<30% change)', () => {
+    (env.project as any) = {
+      saveEvent: jest.fn(),
+      collectionsManager: {
+        ensureExists: () => ({
+          watch: jest.fn(),
+          bump: jest.fn(),
+          get: () => ({
+            bump: jest.fn(),
+          }),
+        }),
+      }
+    };
+
+    const ev = new MockActivityRecognitionEvent('STILL', 0.3);
+    const ev2 = new MockActivityRecognitionEvent('STILL', 0.4);
+
+    loadScript();
+    messages.emit('onInit');
+    messages.emit('onEvent', ev);
+    messages.emit('onEvent', ev);
+    messages.emit('onEvent', ev2);
+
+    expect(env.project.saveEvent).toHaveBeenCalledTimes(1);
+    const call = (env.project.saveEvent as jest.Mock).mock.calls[0];
+    expect(call[0].createdAt).toBeTruthy();
+    expect(call[0].deviceId).toBe("TEST");
+    expect(call[0].kind).toBe("activity-recognition");
+    expect(call[0].loginId).toBe("");
+  });
 
   it('stores hourmeter seconds for activity', () => {
     const col = {};
@@ -137,7 +205,6 @@ describe("onInit", () => {
     // from in vehicle to still
     messages.emit('onEvent', still);
 
-    console.log(col);
     expect(col['STILL']).toBe(60);
     expect(col['2020-01-01_STILL']).toBe(60);
     expect(col['IN_VEHICLE']).toBe(120);
