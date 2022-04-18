@@ -28,7 +28,7 @@ function setHourmeter(activity: Activity): void {
     const col = env.project?.collectionsManager?.ensureExists?.<MonoUtils.collections.HourmeterCollection>(
       "hourmeters"
     );
-    const loginDoc = col?.get(login);
+    const loginDoc = col?.get(`_${login}`);
     if (loginDoc) {
       loginDoc.bump(activity.name, activitySeconds);
       loginDoc.bump(`${today}_${activity.name}`, activitySeconds);
