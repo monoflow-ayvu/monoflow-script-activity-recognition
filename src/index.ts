@@ -53,11 +53,13 @@ function currentActivity(): Activity {
 function setCurrentActivity(name: string, confidence: number): void {
   const lastActivity = currentActivity();
   let since = Date.now();
-  if (lastActivity.name === name) {
+  if (lastActivity.name === name && lastActivity.since > 0) {
     since = lastActivity.since;
   } else {
     // save change of activity
-    setHourmeter({name, confidence, since});
+    if (lastActivity.name !== 'unknown') {
+      setHourmeter(lastActivity);
+    }
   }
   const activity = {name, confidence, since} as Activity;
   env.setData('CURRENT_ACTIVITY', activity);
