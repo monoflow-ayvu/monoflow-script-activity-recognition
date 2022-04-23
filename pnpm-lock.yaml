@@ -5,7 +5,7 @@ specifiers:
   '@babel/plugin-transform-arrow-functions': 7.16.7
   '@babel/preset-env': 7.16.11
   '@babel/preset-typescript': 7.16.7
-  '@fermuch/monoutils': ^0.1.4
+  '@fermuch/monoutils': 0.1.4
   '@fermuch/telematree': 9.21.0
   '@jsdevtools/version-bump-prompt': 6.1.0
   '@size-limit/preset-big-lib': 7.0.8
