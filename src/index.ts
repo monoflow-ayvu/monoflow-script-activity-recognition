@@ -174,8 +174,10 @@ messages.on('onCall', (name: string, args: unknown) => {
 
 messages.on('onPeriodic', () => {
   const activity = currentActivity();
-  updateNotification({
-    activityType: activity.name,
-    confidence: activity.confidence,
-  });
+  if (activity.confidence >= conf.get('minimumAccuracy', 0) / 100) {
+    updateNotification({
+      activityType: activity.name,
+      confidence: activity.confidence,
+    });
+  }
 })
