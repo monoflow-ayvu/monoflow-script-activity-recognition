@@ -131,11 +131,12 @@ function isSignificantChange(name: string, confidence: number): boolean {
 function changeHandler(event: ActivityRecognitionEvent): void {
   const data = event.getData()?.data;
 
-  if (conf.get('enableDoNotMoveWhileLocked', false)) {
-    const isStopped = data?.activityType === 'STILL' || data?.activityType === 'UNKNOWN';
-    const hasConfidence = (data?.confidence || 0) >= (conf.get('minimumAccuracy', 0) / 100);
-    const isLocked = MonoUtils.wk.lock.getLockState();
+  const isUnknownActivity = data?.activityType === 'UNKNOWN' || data?.activityType === 'TILTING';
+  if (!isUnknownActivity && conf.get('enableDoNotMoveWhileLocked', false)) {
+    const isStopped = data?.activityType === 'STILL';
     const isMoving = !isStopped;
+    const isLocked = MonoUtils.wk.lock.getLockState();
+    const hasConfidence = (data?.confidence || 0) >= (conf.get('minimumAccuracy', 0) / 100);
     
     if (isStopped && isNotificationSet() && hasConfidence) {
       setNotification(false);
