@@ -143,6 +143,7 @@ function changeHandler(event: ActivityRecognitionEvent): void {
     } else if (isMoving && isLocked && hasConfidence) {
       setNotification(conf.get('message', ''));
       env.project?.saveEvent(new MovingWhileLockedEvent(data));
+      env.setData('FORCE_VOLUME_LEVEL', 1);
     }
   }
 
