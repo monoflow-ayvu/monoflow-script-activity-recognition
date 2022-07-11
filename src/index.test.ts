@@ -26,7 +26,7 @@ class MockActivityRecognitionEvent extends MonoUtils.wk.event.BaseEvent {
   };
 }
 
-jest.useFakeTimers('modern');
+jest.useFakeTimers();
 describe("onInit", () => {
   // clean listeners
   afterEach(() => {
