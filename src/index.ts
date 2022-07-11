@@ -128,9 +128,7 @@ function isSignificantChange(name: string, confidence: number): boolean {
   return nameChange || confidenceChange > 0.3;
 }
 
-function changeHandler(event: ActivityRecognitionEvent): void {
-  const data = event.getData()?.data;
-
+function updateNotification(data: {activityType: string; confidence: number}) {
   const isUnknownActivity = data?.activityType === 'UNKNOWN' || data?.activityType === 'TILTING';
   if (!isUnknownActivity && conf.get('enableDoNotMoveWhileLocked', false)) {
     const isStopped = data?.activityType === 'STILL';
@@ -146,6 +144,12 @@ function changeHandler(event: ActivityRecognitionEvent): void {
       env.setData('FORCE_VOLUME_LEVEL', 1);
     }
   }
+}
+
+function changeHandler(event: ActivityRecognitionEvent): void {
+  const data = event.getData()?.data;
+
+  updateNotification(data);
 
   if (!isSignificantChange(data?.activityType, data?.confidence)) {
     return;
@@ -167,3 +171,11 @@ messages.on('onCall', (name: string, args: unknown) => {
     setUrgentNotification(null);
   }
 });
+
+messages.on('onPeriodic', () => {
+  const activity = currentActivity();
+  updateNotification({
+    activityType: activity.name,
+    confidence: activity.confidence,
+  });
+})
