@@ -1,13 +1,62 @@
 import * as MonoUtils from "@fermuch/monoutils";
 import { currentLogin } from "@fermuch/monoutils";
+import { getUrgentNotification, setUrgentNotification, wakeup } from "./utils";
 
 // based on settingsSchema @ package.json
-// type Config = {}
-// const conf = new MonoUtils.config.Config<Config>();
+type Config = {
+  enableDoNotMoveWhileLocked: boolean;
+  minimumAccuracy?: number;
+  message?: string;
+  enableDismissButton?: boolean;
+}
+const conf = new MonoUtils.config.Config<Config>();
 
 declare class ActivityRecognitionEvent extends MonoUtils.wk.event.BaseEvent {
   kind: 'activity-recognition';
   getData(): {kind: string; data: {activityType: string; confidence: number}};
+}
+
+class MovingWhileLockedEvent extends MonoUtils.wk.event.BaseEvent {
+  kind: 'moving-while-locked';
+  constructor(public event: {activityType: string; confidence: number}) {
+    super();
+  }
+
+  getData(): {activity: {activityType: string; confidence: number}} {
+    return {
+      activity: this.event,
+    }
+  }
+}
+
+function setNotification(message: string | false) {
+  if (message !== false) {
+    wakeup();
+  }
+  if (typeof message === 'string') {
+    const buttonEnabled = conf.get('enableDismissButton', false);
+    const actions = buttonEnabled ? [{
+      name: 'OK',
+      action: 'activity-recognition:ok',
+      payload: {},
+    }] : []
+    setUrgentNotification({
+      title: message,
+      message: '',
+      color: '#fa4023',
+      actions: actions,
+      urgent: true,
+    });
+  } else {
+    setUrgentNotification(null);
+  }
+  if (message !== false) {
+    wakeup();
+  }
+}
+
+function isNotificationSet() {
+  return !!getUrgentNotification()
 }
 
 interface Activity {
@@ -80,19 +129,39 @@ function isSignificantChange(name: string, confidence: number): boolean {
 }
 
 function changeHandler(event: ActivityRecognitionEvent): void {
-  const {kind, data} = event.getData();
+  const data = event.getData()?.data;
 
-  if (!isSignificantChange(data.activityType, data.confidence)) {
+  if (conf.get('enableDoNotMoveWhileLocked', false)) {
+    const isStopped = data?.activityType === 'STILL' || data?.activityType === 'UNKNOWN';
+    const hasConfidence = (data?.confidence || 0) >= (conf.get('minimumAccuracy', 0) / 100);
+    const isLocked = MonoUtils.wk.lock.getLockState();
+    const isMoving = !isStopped;
+    
+    if (isStopped && isNotificationSet() && hasConfidence) {
+      setNotification(false);
+    } else if (isMoving && isLocked && hasConfidence) {
+      setNotification(conf.get('message', ''));
+      env.project?.saveEvent(new MovingWhileLockedEvent(data));
+    }
+  }
+
+  if (!isSignificantChange(data?.activityType, data?.confidence)) {
     return;
   }
 
   platform.log('saving significant activity recognition event', data);
   env.project?.saveEvent(event);
-  setCurrentActivity(data.activityType, data.confidence);
+  setCurrentActivity(data?.activityType, data?.confidence);
 }
 
 messages.on('onInit', function() {
   platform.log('activity recognition script started');
   
   MonoUtils.wk.event.subscribe<ActivityRecognitionEvent>('activity-recognition', changeHandler);
+});
+
+messages.on('onCall', (name: string, args: unknown) => {
+  if (name === 'activity-recognition:ok') {
+    setUrgentNotification(null);
+  }
 });

@@ -2,7 +2,90 @@
   "name": "activity-recognition",
   "version": "0.5.0",
   "description": "Script para criar eventos ao reconhecer uma atividade.",
-  "settingsSchema": {},
+  "settingsSchema": {
+    "display": "form",
+    "settings": {
+      "pdf": {
+        "id": "1ec0f8ee-6685-5d98-a847-26f67b67d6f0",
+        "src": "https://files.form.io/pdf/5692b91fd1028f01000407e3/file/1ec0f8ee-6685-5d98-a847-26f67b67d6f0"
+      }
+    },
+    "components": [
+      {
+        "label": "Habilitar alarme se maquina tiver atividade quando bloqueada",
+        "tooltip": "Se a maquina inicia alguma atividade, mas a maquina deveria estar bloqueada, gerar um evento no banco de dados e dar um alarme ao usuario.",
+        "tableView": false,
+        "defaultValue": false,
+        "key": "enableDoNotMoveWhileLocked",
+        "type": "checkbox",
+        "input": true
+      },
+      {
+        "label": "Alarme",
+        "key": "alarme",
+        "conditional": {
+          "show": true,
+          "when": "enableDoNotMoveWhileLocked",
+          "eq": "true"
+        },
+        "type": "well",
+        "input": false,
+        "tableView": false,
+        "components": [
+          {
+            "label": "Mínimo de certeza",
+            "suffix": "%",
+            "mask": false,
+            "tableView": false,
+            "defaultValue": 85,
+            "delimiter": false,
+            "requireDecimal": false,
+            "inputFormat": "plain",
+            "truncateMultipleSpaces": false,
+            "validate": {
+              "required": true,
+              "min": 0,
+              "max": 100
+            },
+            "key": "minimumAccuracy",
+            "type": "number",
+            "input": true
+          },
+          {
+            "label": "Mensagem",
+            "autoExpand": false,
+            "tableView": true,
+            "validate": {
+              "required": true,
+              "minLength": 3,
+              "maxLength": 300
+            },
+            "key": "message",
+            "type": "textarea",
+            "rows": 1,
+            "input": true,
+            "defaultValue": "Maquina bloqueada! O mau uso será reportado."
+          },
+          {
+            "label": "Habilitar botão para desativar alarme",
+            "tableView": false,
+            "key": "enableDismissButton",
+            "type": "checkbox",
+            "input": true,
+            "defaultValue": false
+          }
+        ]
+      },
+      {
+        "type": "button",
+        "label": "Submit",
+        "key": "submit",
+        "disableOnInvalid": true,
+        "input": true,
+        "tableView": false
+      }
+    ]
+  },
   "license": "MIT",
   "private": true,
   "scripts": {
