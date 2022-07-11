@@ -1,6 +1,6 @@
 {
   "name": "activity-recognition",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Script para criar eventos ao reconhecer uma atividade.",
   "settingsSchema": {
     "display": "form",
