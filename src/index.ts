@@ -11,6 +11,8 @@ type Config = {
 }
 const conf = new MonoUtils.config.Config<Config>();
 
+const ACTION_RECOGNITION_OK = 'activity-recognition:ok' as const;
+
 declare class ActivityRecognitionEvent extends MonoUtils.wk.event.BaseEvent {
   kind: 'activity-recognition';
   getData(): {kind: string; data: {activityType: string; confidence: number}};
@@ -48,7 +50,15 @@ function setNotification(message: string | false) {
       urgent: true,
     });
   } else {
-    setUrgentNotification(null);
+    const current = getUrgentNotification();
+    if (!current) return;
+    if (
+      current?.title === '' ||
+      current?.title === (message || '') ||
+      current?.actions?.some((n) => n.action === ACTION_RECOGNITION_OK)
+    ) {
+      setUrgentNotification(null);
+    }
   }
   if (message !== false) {
     wakeup();
