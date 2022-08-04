@@ -39,7 +39,7 @@ function setNotification(message: string | false) {
     const buttonEnabled = conf.get('enableDismissButton', false);
     const actions = buttonEnabled ? [{
       name: 'OK',
-      action: 'activity-recognition:ok',
+      action: ACTION_RECOGNITION_OK,
       payload: {},
     }] : []
     setUrgentNotification({
@@ -177,7 +177,7 @@ messages.on('onInit', function() {
 });
 
 messages.on('onCall', (name: string, args: unknown) => {
-  if (name === 'activity-recognition:ok') {
+  if (name === ACTION_RECOGNITION_OK) {
     setUrgentNotification(null);
   }
 });
