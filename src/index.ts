@@ -8,6 +8,7 @@ type Config = {
   minimumAccuracy?: number;
   message?: string;
   enableDismissButton?: boolean;
+  enableHourmeters?: boolean;
 }
 const conf = new MonoUtils.config.Config<Config>();
 
@@ -76,21 +77,23 @@ interface Activity {
 }
 
 function setHourmeter(activity: Activity): void {
-  const activitySeconds = (Date.now() - activity.since) / 1000;
-  const hourmeterCol = MonoUtils.collections.getHourmeterDoc();
-  const today = new Date().toISOString().split('T')[0];
-  hourmeterCol.bump(activity.name, activitySeconds);
-  hourmeterCol.bump(`${today}_${activity.name}`, activitySeconds);
+  if (conf.get('enableHourmeters', false)) {
+    const activitySeconds = (Date.now() - activity.since) / 1000;
+    const hourmeterCol = MonoUtils.collections.getHourmeterDoc();
+    const today = new Date().toISOString().split('T')[0];
+    hourmeterCol.bump(activity.name, activitySeconds);
+    hourmeterCol.bump(`${today}_${activity.name}`, activitySeconds);
 
-  const login = currentLogin();
-  if (login) {
-    const col = env.project?.collectionsManager?.ensureExists?.<MonoUtils.collections.HourmeterCollection>(
-      "hourmeters"
-    );
-    const loginDoc = col?.get(`_${login}`);
-    if (loginDoc) {
-      loginDoc.bump(activity.name, activitySeconds);
-      loginDoc.bump(`${today}_${activity.name}`, activitySeconds);
+    const login = currentLogin();
+    if (login) {
+      const col = env.project?.collectionsManager?.ensureExists?.<MonoUtils.collections.HourmeterCollection>(
+        "hourmeters"
+      );
+      const loginDoc = col?.get(`_${login}`);
+      if (loginDoc) {
+        loginDoc.bump(activity.name, activitySeconds);
+        loginDoc.bump(`${today}_${activity.name}`, activitySeconds);
+      }
     }
   }
 }

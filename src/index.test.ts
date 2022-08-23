@@ -172,7 +172,7 @@ describe("onInit", () => {
     expect(call[0].loginId).toBe("");
   });
 
-  it('stores hourmeter seconds for activity', () => {
+  it('stores hourmeter seconds for activity if enableHourmeters=true', () => {
     const col = {};
     (env.project as any) = {
       saveEvent: jest.fn(),
@@ -186,6 +186,9 @@ describe("onInit", () => {
         }),
       }
     };
+    getSettings = () => ({
+      enableHourmeters: true,
+    });
 
     const still = new MockActivityRecognitionEvent('STILL', 0.9);
     const vehicle = new MockActivityRecognitionEvent('IN_VEHICLE', 1);

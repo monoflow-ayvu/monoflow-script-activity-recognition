@@ -12,6 +12,15 @@
     },
     "components": [
       {
+        "label": "Salvar dados na tabela de horimetros",
+        "tooltip": "Cada vez que a atividade muda, salvar um registro na tabela de horimetros. Não modifica a criação de eventos.",
+        "tableView": false,
+        "defaultValue": false,
+        "key": "enableHourmeters",
+        "type": "checkbox",
+        "input": true
+      },
+      {
         "label": "Habilitar alarme se maquina tiver atividade quando bloqueada",
         "tooltip": "Se a maquina inicia alguma atividade, mas a maquina deveria estar bloqueada, gerar um evento no banco de dados e dar um alarme ao usuario.",
         "tableView": false,
