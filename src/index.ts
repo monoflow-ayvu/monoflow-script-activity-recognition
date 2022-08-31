@@ -145,7 +145,7 @@ function updateNotification(data: {activityType: string; confidence: number}) {
   const isUnknownActivity = data?.activityType === 'UNKNOWN' || data?.activityType === 'TILTING';
   if (!isUnknownActivity && conf.get('enableDoNotMoveWhileLocked', false)) {
     const isStopped = data?.activityType === 'STILL';
-    const isMoving = !isStopped;
+    const isMoving = data?.activityType === 'IN_VEHICLE';
     const isLocked = MonoUtils.wk.lock.getLockState();
     const hasConfidence = (data?.confidence || 0) >= (conf.get('minimumAccuracy', 0) / 100);
     
