@@ -66,8 +66,14 @@ function setNotification(message: string | false) {
   }
 }
 
-function isNotificationSet() {
-  return !!getUrgentNotification()
+function isNotificationSet(): boolean {
+  const notif = getUrgentNotification();
+  if (!notif) return false;
+
+  const withButton = notif?.actions?.some((n) => n.action === ACTION_RECOGNITION_OK);
+  const withTitle = notif?.title === conf.get('message', '');
+
+  return withButton || withTitle;
 }
 
 interface Activity {
@@ -141,17 +147,40 @@ function isSignificantChange(name: string, confidence: number): boolean {
   return nameChange || confidenceChange > 0.3;
 }
 
-function updateNotification(data: {activityType: string; confidence: number}) {
+function maybeAlert(data: {activityType: string; confidence: number}) {
   const isUnknownActivity = data?.activityType === 'UNKNOWN' || data?.activityType === 'TILTING';
   if (!isUnknownActivity && conf.get('enableDoNotMoveWhileLocked', false)) {
     const isStopped = data?.activityType === 'STILL';
     const isMoving = data?.activityType === 'IN_VEHICLE';
     const isLocked = MonoUtils.wk.lock.getLockState();
     const hasConfidence = (data?.confidence || 0) >= (conf.get('minimumAccuracy', 0) / 100);
+    const currentGps = env.data?.CURRENT_GPS_POSITION as {
+      when: number; // Date.now()
+      latitude: number;
+      longitude: number;
+      altitude: number;
+      accuracy: number;
+      altitudeAccuracy: number;
+      heading: number;
+      speed: number;
+    }
+    const now = Date.now();
     
     if (isStopped && isNotificationSet() && hasConfidence) {
       setNotification(false);
     } else if (isMoving && isLocked && hasConfidence) {
+      // maximum time of 5 minutes
+      if (
+        // we need gps
+           !currentGps
+        // we only accept 5 minutes old gps
+        || ((now - currentGps?.when) / 1000) > (5 * 60)
+        // minimum speed is 5km/h
+        || (currentGps?.speed * 3.6) < 5.0
+      ) {
+        return;
+      }
+
       setNotification(conf.get('message', ''));
       env.project?.saveEvent(new MovingWhileLockedEvent(data));
       env.setData('FORCE_VOLUME_LEVEL', 1);
@@ -162,7 +191,7 @@ function updateNotification(data: {activityType: string; confidence: number}) {
 function changeHandler(event: ActivityRecognitionEvent): void {
   const data = event.getData()?.data;
 
-  updateNotification(data);
+  maybeAlert(data);
 
   if (!isSignificantChange(data?.activityType, data?.confidence)) {
     return;
@@ -187,10 +216,8 @@ messages.on('onCall', (name: string, args: unknown) => {
 
 messages.on('onPeriodic', () => {
   const activity = currentActivity();
-  if (activity.confidence >= conf.get('minimumAccuracy', 0) / 100) {
-    updateNotification({
-      activityType: activity.name,
-      confidence: activity.confidence,
-    });
-  }
+  maybeAlert({
+    activityType: activity.name,
+    confidence: activity.confidence,
+  });
 })
