@@ -168,8 +168,11 @@ function maybeAlert(data: {activityType: string; confidence: number}) {
     
     if (isStopped && isNotificationSet() && hasConfidence) {
       setNotification(false);
-    } else if (isMoving && isLocked && hasConfidence) {
-      // maximum time of 5 minutes
+      return;
+    }
+    
+    if (isMoving && isLocked && hasConfidence) {
+      // filter by gps
       if (
         // we need gps
            !currentGps
@@ -181,9 +184,10 @@ function maybeAlert(data: {activityType: string; confidence: number}) {
         return;
       }
 
-      setNotification(conf.get('message', ''));
+      setNotification(conf.get('message', '') || false);
       env.project?.saveEvent(new MovingWhileLockedEvent(data));
       env.setData('FORCE_VOLUME_LEVEL', 1);
+      return;
     }
   }
 }
