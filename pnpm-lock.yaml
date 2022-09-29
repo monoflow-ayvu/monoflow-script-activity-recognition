@@ -5,7 +5,7 @@ specifiers:
   '@babel/plugin-transform-arrow-functions': 7.18.6
   '@babel/preset-env': 7.19.3
   '@babel/preset-typescript': 7.18.6
-  '@fermuch/monoutils': 0.1.4
+  '@fermuch/monoutils': 0.2.0
   '@fermuch/telematree': 9.23.0
   '@jsdevtools/version-bump-prompt': 6.1.0
   '@size-limit/preset-big-lib': 8.1.0
@@ -36,7 +36,7 @@ specifiers:
   webpack-cli: 4.10.0
 
 dependencies:
-  '@fermuch/monoutils': 0.1.4_8316baa10ea9fccc10b2cd1026b2e121
+  '@fermuch/monoutils': 0.2.0_8316baa10ea9fccc10b2cd1026b2e121
   '@fermuch/telematree': 9.23.0_8316baa10ea9fccc10b2cd1026b2e121
   cross-fetch: 3.1.5
   firebase: 9.10.0
@@ -1305,8 +1305,8 @@ packages:
     engines: {node: '>=10.0.0'}
     dev: true
 
-  /@fermuch/monoutils/0.1.4_8316baa10ea9fccc10b2cd1026b2e121:
-    resolution: {integrity: sha512-hqpRyO1QZW3j0qDwW4oerjkaMhIQoaqJwSIsKN+VNzIT5YRCBKniCSgQMml143509ylBkVw8o4VAePy+kA908g==}
+  /@fermuch/monoutils/0.2.0_8316baa10ea9fccc10b2cd1026b2e121:
+    resolution: {integrity: sha512-bbeNmaCiIJRdQYP8IsAQJ2qMFZTnLxyCidtSOO+0RgbaGqYXL1xoKlXMiX3FzNWrgBkftfZuD+o013ORahHNBA==}
     dependencies:
       '@fermuch/telematree': 9.23.0_8316baa10ea9fccc10b2cd1026b2e121
       typed-emitter: 2.1.0
