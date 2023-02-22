@@ -13,7 +13,7 @@ specifiers:
   '@types/firebase': 3.2.1
   '@types/jest': 29.4.0
   '@types/lodash': 4.14.191
-  '@types/uuid': 9.0.0
+  '@types/uuid': 9.0.1
   babel-loader: 9.1.2
   brotli-webpack-plugin: 1.1.0
   commander: 10.0.0
@@ -54,7 +54,7 @@ devDependencies:
   '@types/firebase': 3.2.1
   '@types/jest': 29.4.0
   '@types/lodash': 4.14.191
-  '@types/uuid': 9.0.0
+  '@types/uuid': 9.0.1
   babel-loader: 9.1.2_838179c1027e53d7ee8199eddddc0583
   brotli-webpack-plugin: 1.1.0
   commander: 10.0.0
@@ -2428,8 +2428,8 @@ packages:
     resolution: {integrity: sha512-Hl219/BT5fLAaz6NDkSuhzasy49dwQS/DSdu4MdggFB8zcXv7vflBI3xp7FEmkmdDkBUI2bPUNeMttp2knYdxw==}
     dev: true
 
-  /@types/uuid/9.0.0:
-    resolution: {integrity: sha512-kr90f+ERiQtKWMz5rP32ltJ/BtULDI5RVO0uavn1HQUOwjx0R1h0rnDYNL0CepF1zL5bSY6FISAfd9tOdDhU5Q==}
+  /@types/uuid/9.0.1:
+    resolution: {integrity: sha512-rFT3ak0/2trgvp4yYZo5iKFEPsET7vKydKF+VRCxlQ9bpheehyAJH89dAkaLEq/j/RZXJIqcgsmPJKUP1Z28HA==}
     dev: true
 
   /@types/yargs-parser/21.0.0:
