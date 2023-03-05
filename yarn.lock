@@ -6075,10 +6075,10 @@ mkdirp-classic@^0.5.2, mkdirp-classic@^0.5.3:
   resolved "https://registry.yarnpkg.com/mkdirp-classic/-/mkdirp-classic-0.5.3.tgz#fa10c9115cc6d8865be221ba47ee9bed78601113"
   integrity sha512-gKLcREMhtuZRwRAfqP3RFW+TK4JqApVBtOIftVgjuABpAtpxhPGaDcfvbhNvD0B8iD1oUr/txX35NjcaY6Ns/A==
 
-mobx-keystone@1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/mobx-keystone/-/mobx-keystone-1.3.0.tgz#ceecc3deee1c94df54edc1b77174afed029ee37c"
-  integrity sha512-PyTm+x6x2435vwEE9qby8RPxf52rVfWJ5K/PSNIByQ0d5geLPylvshB2myQ026rgSRUVTlO5FldJJCTFIYoS0Q==
+mobx-keystone@1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/mobx-keystone/-/mobx-keystone-1.4.0.tgz#7efd121882b94ecb01572c58ff3bbab0daaef813"
+  integrity sha512-SM6St+d8WnFHPMEff1tQDKnVLI/6LKKmp4R8PTpi5VI2bLevI+l26ezBZ5u8MQtUcmiFYme8R/eyO+fkyG4zfA==
   dependencies:
     fast-deep-equal "^3.1.3"
     nanoid "^3.3.4"
