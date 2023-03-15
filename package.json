@@ -127,7 +127,7 @@
     "@size-limit/preset-big-lib": "8.2.4",
     "@types/commander": "2.12.2",
     "@types/firebase": "3.2.1",
-    "@types/jest": "29.4.2",
+    "@types/jest": "29.4.4",
     "@types/lodash": "4.14.191",
     "@types/uuid": "9.0.1",
     "babel-loader": "9.1.2",
