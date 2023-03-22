@@ -168,6 +168,7 @@ function maybeAlert(data: {activityType: string; confidence: number}) {
     const now = Date.now();
     
     if (isStopped && isNotificationSet() && hasConfidence) {
+      alertAt = null;
       setNotification(false);
       return;
     }
@@ -185,8 +186,8 @@ function maybeAlert(data: {activityType: string; confidence: number}) {
         return;
       }
 
-      // alert in one minute
-      alertAt = Number(new Date()) + (1000 * 60);
+      // alert in 30 seconds
+      alertAt = Number(new Date()) + (1000 * 30);
       // env.project?.saveEvent(new MovingWhileLockedEvent(data));
       return;
     }
