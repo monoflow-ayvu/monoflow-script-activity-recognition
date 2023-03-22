@@ -147,6 +147,7 @@ function isSignificantChange(name: string, confidence: number): boolean {
   return nameChange || confidenceChange > 0.3;
 }
 
+let alertAt: number | null = null;
 function maybeAlert(data: {activityType: string; confidence: number}) {
   const isUnknownActivity = data?.activityType === 'UNKNOWN' || data?.activityType === 'TILTING';
   if (!isUnknownActivity && conf.get('enableDoNotMoveWhileLocked', false)) {
@@ -171,22 +172,22 @@ function maybeAlert(data: {activityType: string; confidence: number}) {
       return;
     }
     
-    if (isMoving && isLocked && hasConfidence) {
+    if (isMoving && isLocked && hasConfidence && alertAt === null) {
       // filter by gps
       if (
         // we need gps
            !currentGps
         // we only accept 5 minutes old gps
         || ((now - currentGps?.when) / 1000) > (5 * 60)
-        // minimum speed is 5km/h
-        || (currentGps?.speed * 3.6) < 5.0
+        // minimum speed is 6km/h
+        || (currentGps?.speed * 3.6) < 6.0
       ) {
         return;
       }
 
-      setNotification(conf.get('message', '') || false);
-      env.project?.saveEvent(new MovingWhileLockedEvent(data));
-      env.setData('FORCE_VOLUME_LEVEL', 1);
+      // alert in one minute
+      alertAt = Number(new Date()) + (1000 * 60);
+      // env.project?.saveEvent(new MovingWhileLockedEvent(data));
       return;
     }
   }
@@ -214,6 +215,7 @@ messages.on('onInit', function() {
 
 messages.on('onCall', (name: string, args: unknown) => {
   if (name === ACTION_RECOGNITION_OK) {
+    alertAt = null;
     setUrgentNotification(null);
   }
 });
@@ -224,4 +226,12 @@ messages.on('onPeriodic', () => {
     activityType: activity.name,
     confidence: activity.confidence,
   });
-})
+
+  if (alertAt !== null && Date.now() >= alertAt) {
+    setNotification(conf.get('message', '') || false);
+    env.setData('FORCE_VOLUME_LEVEL', 1);
+
+    // re-check in one minute
+    alertAt = Number(new Date()) + (1000 * 60);
+  }
+});
