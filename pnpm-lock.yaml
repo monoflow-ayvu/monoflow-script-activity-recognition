@@ -11,7 +11,7 @@ specifiers:
   '@size-limit/preset-big-lib': 8.2.4
   '@types/commander': 2.12.2
   '@types/firebase': 3.2.1
-  '@types/jest': 29.5.0
+  '@types/jest': 29.5.1
   '@types/lodash': 4.14.194
   '@types/uuid': 9.0.1
   babel-loader: 9.1.2
@@ -52,7 +52,7 @@ devDependencies:
   '@size-limit/preset-big-lib': 8.2.4_4c3792c47a9fd5162eb45d9fd8257a2f
   '@types/commander': 2.12.2
   '@types/firebase': 3.2.1
-  '@types/jest': 29.5.0
+  '@types/jest': 29.5.1
   '@types/lodash': 4.14.194
   '@types/uuid': 9.0.1
   babel-loader: 9.1.2_16e65b57efdf44bb098a0f4ad548f922
@@ -2370,8 +2370,8 @@ packages:
       '@types/istanbul-lib-report': 3.0.0
     dev: true
 
-  /@types/jest/29.5.0:
-    resolution: {integrity: sha512-3Emr5VOl/aoBwnWcH/EFQvlSAmjV+XtV9GGu5mwdYew5vhQh0IUZx/60x0TzHDu09Bi7HMx10t/namdJw5QIcg==}
+  /@types/jest/29.5.1:
+    resolution: {integrity: sha512-tEuVcHrpaixS36w7hpsfLBLpjtMRJUE09/MHXn923LOVojDwyC14cWcfc0rDs0VEfUyYmt/+iX1kxxp+gZMcaQ==}
     dependencies:
       expect: 29.5.0
       pretty-format: 29.5.0
