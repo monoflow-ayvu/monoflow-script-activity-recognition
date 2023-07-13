@@ -22,7 +22,7 @@ specifiers:
   firebase: 9.23.0
   graphql: 16.7.1
   graphql-request: 6.1.0
-  inquirer: 9.2.7
+  inquirer: 9.2.8
   jest: 29.6.1
   lodash: 4.17.21
   mobx: 6.9.1
@@ -61,7 +61,7 @@ devDependencies:
   compression-webpack-plugin: 10.0.0_webpack@5.88.1
   graphql: 16.7.1
   graphql-request: 6.1.0_graphql@16.7.1
-  inquirer: 9.2.7
+  inquirer: 9.2.8
   jest: 29.6.1
   mobx-keystone: 1.6.3_mobx@6.9.1
   semver: 7.5.4
@@ -3077,8 +3077,8 @@ packages:
       supports-color: 7.2.0
     dev: true
 
-  /chalk/5.2.0:
-    resolution: {integrity: sha512-ree3Gqw/nazQAPuJJEy+avdl7QfZMcUvmHIKgEZkGL+xOBzRvup5Hxo6LHuMceSxOabuJLJm5Yp/92R9eMmMvA==}
+  /chalk/5.3.0:
+    resolution: {integrity: sha512-dLitG79d+GV1Nb/VYcCDFivJeK1hiukt9QjRNVOsUtTy1rR1YJsmpGGTZ3qJos+uw7WmWF4wUwBd9jxjocFC2w==}
     engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
     dev: true
 
@@ -4222,12 +4222,12 @@ packages:
       through: 2.3.8
     dev: true
 
-  /inquirer/9.2.7:
-    resolution: {integrity: sha512-Bf52lnfvNxGPJPltiNO2tLBp3zC339KNlGMqOkW+dsvNikBhcVDK5kqU2lVX2FTPzuXUFX5WJDlsw//w3ZwoTw==}
+  /inquirer/9.2.8:
+    resolution: {integrity: sha512-SJ0fVfgIzZL1AD6WvFhivlh5/3hN6WeAvpvPrpPXH/8MOcQHeXhinmSm5CDJNRC2Q+sLh9YJ5k8F8/5APMXSfw==}
     engines: {node: '>=14.18.0'}
     dependencies:
       ansi-escapes: 4.3.2
-      chalk: 5.2.0
+      chalk: 5.3.0
       cli-cursor: 3.1.0
       cli-width: 4.0.0
       external-editor: 3.1.0
