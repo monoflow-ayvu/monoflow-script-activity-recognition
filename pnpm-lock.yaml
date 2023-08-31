@@ -18,7 +18,7 @@ specifiers:
   brotli-webpack-plugin: 1.1.0
   commander: 11.0.0
   compression-webpack-plugin: 10.0.0
-  cross-fetch: 3.1.8
+  cross-fetch: 4.0.0
   firebase: 9.23.0
   graphql: 16.8.0
   graphql-request: 6.1.0
@@ -36,9 +36,9 @@ specifiers:
   webpack-cli: 5.1.4
 
 dependencies:
-  '@fermuch/monoutils': 0.2.0_0660245479f071dc3c988870f66d3df1
-  '@fermuch/telematree': 9.23.0_0660245479f071dc3c988870f66d3df1
-  cross-fetch: 3.1.8
+  '@fermuch/monoutils': 0.2.0_968e70918bea8d2e190be96fd8b89c7c
+  '@fermuch/telematree': 9.23.0_968e70918bea8d2e190be96fd8b89c7c
+  cross-fetch: 4.0.0
   firebase: 9.23.0
   lodash: 4.17.21
   mobx: 6.10.2
@@ -1300,10 +1300,10 @@ packages:
     engines: {node: '>=10.0.0'}
     dev: true
 
-  /@fermuch/monoutils/0.2.0_0660245479f071dc3c988870f66d3df1:
+  /@fermuch/monoutils/0.2.0_968e70918bea8d2e190be96fd8b89c7c:
     resolution: {integrity: sha512-bbeNmaCiIJRdQYP8IsAQJ2qMFZTnLxyCidtSOO+0RgbaGqYXL1xoKlXMiX3FzNWrgBkftfZuD+o013ORahHNBA==}
     dependencies:
-      '@fermuch/telematree': 9.23.0_0660245479f071dc3c988870f66d3df1
+      '@fermuch/telematree': 9.23.0_968e70918bea8d2e190be96fd8b89c7c
       typed-emitter: 2.1.0
     transitivePeerDependencies:
       - cross-fetch
@@ -1312,7 +1312,7 @@ packages:
       - mobx-keystone
     dev: false
 
-  /@fermuch/telematree/9.23.0_0660245479f071dc3c988870f66d3df1:
+  /@fermuch/telematree/9.23.0_968e70918bea8d2e190be96fd8b89c7c:
     resolution: {integrity: sha512-lsKuzVtnsutsgUvCG/LHTnq29MFvT5nkKDYZ1Tr50Q5SmxTZN4NrsvIzoiGbOovPg6u64xGsdqsmRFFPOZNdMA==}
     peerDependencies:
       cross-fetch: ^3.1.5
@@ -1320,7 +1320,7 @@ packages:
       mobx-keystone: 0.67.3
     dependencies:
       '@stablelib/snappy': 1.0.1
-      cross-fetch: 3.1.8
+      cross-fetch: 4.0.0
       eta: 1.12.3
       eval5: 1.4.7
       fflate: 0.7.3
@@ -3219,6 +3219,15 @@ packages:
       node-fetch: 2.6.12
     transitivePeerDependencies:
       - encoding
+    dev: true
+
+  /cross-fetch/4.0.0:
+    resolution: {integrity: sha512-e4a5N8lVvuLgAWgnCrLr2PP0YyDOTHa9H/Rj54dirp61qXnNq46m82bRhNqIA5VccJtWBvPTFRV3TtvHUKPB1g==}
+    dependencies:
+      node-fetch: 2.6.12
+    transitivePeerDependencies:
+      - encoding
+    dev: false
 
   /cross-spawn/7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
