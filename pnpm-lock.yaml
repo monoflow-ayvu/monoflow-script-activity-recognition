@@ -28,7 +28,7 @@ specifiers:
   mobx: 6.10.2
   mobx-keystone: 1.6.5
   semver: 7.5.4
-  size-limit: 8.2.6
+  size-limit: 9.0.0
   ts-loader: 9.4.4
   typed-emitter: 2.1.0
   typescript: 4.9.5
@@ -65,7 +65,7 @@ devDependencies:
   jest: 29.6.4
   mobx-keystone: 1.6.5_mobx@6.10.2
   semver: 7.5.4
-  size-limit: 8.2.6
+  size-limit: 9.0.0
   ts-loader: 9.4.4_typescript@4.9.5+webpack@5.88.2
   typed-emitter: 2.1.0
   typescript: 4.9.5
@@ -5925,19 +5925,6 @@ packages:
 
   /sisteransi/1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
-    dev: true
-
-  /size-limit/8.2.6:
-    resolution: {integrity: sha512-zpznim/tX/NegjoQuRKgWTF4XiB0cn2qt90uJzxYNTFAqexk4b94DOAkBD3TwhC6c3kw2r0KcnA5upziVMZqDg==}
-    engines: {node: ^14.0.0 || ^16.0.0 || >=18.0.0}
-    hasBin: true
-    dependencies:
-      bytes-iec: 3.1.1
-      chokidar: 3.5.3
-      globby: 11.1.0
-      lilconfig: 2.1.0
-      nanospinner: 1.1.0
-      picocolors: 1.0.0
     dev: true
 
   /size-limit/9.0.0:
