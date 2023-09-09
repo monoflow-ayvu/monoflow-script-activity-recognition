@@ -22,7 +22,7 @@ specifiers:
   firebase: 9.23.0
   graphql: 16.8.0
   graphql-request: 6.1.0
-  inquirer: 9.2.10
+  inquirer: 9.2.11
   jest: 29.6.4
   lodash: 4.17.21
   mobx: 6.10.2
@@ -61,7 +61,7 @@ devDependencies:
   compression-webpack-plugin: 10.0.0_webpack@5.88.2
   graphql: 16.8.0
   graphql-request: 6.1.0_graphql@16.8.0
-  inquirer: 9.2.10
+  inquirer: 9.2.11
   jest: 29.6.4
   mobx-keystone: 1.6.5_mobx@6.10.2
   semver: 7.5.4
@@ -4171,8 +4171,8 @@ packages:
       through: 2.3.8
     dev: true
 
-  /inquirer/9.2.10:
-    resolution: {integrity: sha512-tVVNFIXU8qNHoULiazz612GFl+yqNfjMTbLuViNJE/d860Qxrd3NMrse8dm40VUQLOQeULvaQF8lpAhvysjeyA==}
+  /inquirer/9.2.11:
+    resolution: {integrity: sha512-B2LafrnnhbRzCWfAdOXisUzL89Kg8cVJlYmhqoi3flSiV/TveO+nsXwgKr9h9PIo+J1hz7nBSk6gegRIMBBf7g==}
     engines: {node: '>=14.18.0'}
     dependencies:
       '@ljharb/through': 2.3.9
