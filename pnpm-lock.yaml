@@ -16,7 +16,7 @@ specifiers:
   '@types/uuid': 9.0.5
   babel-loader: 9.1.3
   brotli-webpack-plugin: 1.1.0
-  commander: 11.0.0
+  commander: 11.1.0
   compression-webpack-plugin: 10.0.0
   cross-fetch: 3.1.8
   firebase: 9.23.0
@@ -57,7 +57,7 @@ devDependencies:
   '@types/uuid': 9.0.5
   babel-loader: 9.1.3_a24a650dc9c3ff6f642b929c8571218b
   brotli-webpack-plugin: 1.1.0
-  commander: 11.0.0
+  commander: 11.1.0
   compression-webpack-plugin: 10.0.0_webpack@5.88.2
   graphql: 16.8.1
   graphql-request: 6.1.0_graphql@16.8.1
@@ -2316,7 +2316,7 @@ packages:
     resolution: {integrity: sha512-0QEFiR8ljcHp9bAbWxecjVRuAMr16ivPiGOw6KFQBVrVd0RQIcM3xKdRisH2EDWgVWujiYtHwhSkSUoAAGzH7Q==}
     deprecated: This is a stub types definition for commander (https://github.com/tj/commander.js). commander provides its own type definitions, so you don't need @types/commander installed!
     dependencies:
-      commander: 11.0.0
+      commander: 11.1.0
     dev: true
 
   /@types/eslint-scope/3.7.3:
@@ -3153,8 +3153,8 @@ packages:
     engines: {node: '>=14'}
     dev: true
 
-  /commander/11.0.0:
-    resolution: {integrity: sha512-9HMlXtt/BNoYr8ooyjjNRdIilOTkVJXB+GhxMTtOKwk0R4j4lS4NpjuqmRxroBfnfTSHQIHQB7wryHhXarNjmQ==}
+  /commander/11.1.0:
+    resolution: {integrity: sha512-yPVavfyCcRhmorC7rWlkHn15b4wDVgVmBA7kV4QVBsF7kv/9TKJAbAXVTxvTnwP8HHKjRCJDClKbciiYS7p0DQ==}
     engines: {node: '>=16'}
     dev: true
 
