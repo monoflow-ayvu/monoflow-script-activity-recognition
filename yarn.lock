@@ -2898,10 +2898,10 @@
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-1.0.0.tgz#5fb2e536c1ae9bf35366eed879e827fa59ca41c2"
   integrity sha512-WulqXMDUTYAXCjZnk6JtIHPigp55cVtDgDrO2gHRwhyJto21+1zbVCtOYB2L1F9w4qCQ0rOGWBnBe0FNTiEJIQ==
 
-"@types/firebase@3.2.1":
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/@types/firebase/-/firebase-3.2.1.tgz#17c1c8fee7485ab09668d2461e34540bdf44b3b1"
-  integrity sha512-G8XgHMu2jHlElfc2xVNaYP50F0qrqeTCjgeG1v5b4SRwWG4XKC4fCuEdVZuZaMRmVygcnbRZBAo9O7RsDvmkGQ==
+"@types/firebase@3.2.3":
+  version "3.2.3"
+  resolved "https://registry.yarnpkg.com/@types/firebase/-/firebase-3.2.3.tgz#95972e34a844603ac171222842ee84d8759d4757"
+  integrity sha512-fId22ajZ7CkTMnm/FveFcEGb7Trv97JsUk1Dvc1vIFDiwpVSGKeTUyBOA2Tr2riXe53ZP526G9WDCrq3ulE7tw==
   dependencies:
     firebase "*"
 
